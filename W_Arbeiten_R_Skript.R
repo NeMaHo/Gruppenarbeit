@@ -66,5 +66,5 @@ for(i in 1:100){
 Datensatz <- data.frame(`ID`, `Alter`, `Studienfach`, `Interesse an Mathematik`,
            `Interesse an Programmieren`, `Mathematik-LK(ja/nein)`)
 
-# Schreiben des Datensatzes in CSV-Datei
+# Schreiben des Datensatzes in CSV-Datei - Working Directory setzen
 # write.csv(Datensatz, "data-wissenschaftliches-Arbeiten.csv")
