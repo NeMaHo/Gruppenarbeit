@@ -173,7 +173,7 @@ categorize <- function(x) {
 # -> Erstellen eines gemeinsamen Boxplots der Inputvektoren
 
 # Input: 
-# - x: Matrix/Data Frame kategorialer Vektoren
+# - ...: Einzelne kategoriale Vektoren oder eine Matrix kategorialer Vektoren
 
 # Output: Boxplot der kategorialen Variablen
 
