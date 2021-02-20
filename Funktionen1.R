@@ -166,6 +166,21 @@ categorize <- function(x) {
 }
 
 
+
+# f) Visualisierung von kategorialen Variablen
+
+# Funktion - plotCategorical:
+# -> Erstellen eines gemeinsamen Boxplots der Inputvektoren
+
+# Input: 
+# - x: Matrix/Data Frame kategorialer Vektoren
+
+# Output: Boxplot der kategorialen Variablen
+
+plotCategorical <- function(...) {
+  boxplot(...)
+}
+
 ## Testbereich
 x1 <- rnorm(100)
 x2 <- sample(1:7, 100, replace = TRUE, 
@@ -183,3 +198,5 @@ metricCategoricalRelation(x1, x2)
 
 categorize(x1)
 categorize(x2)
+
+plotCategorical(x1,x2)
