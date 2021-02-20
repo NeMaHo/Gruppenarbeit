@@ -61,6 +61,11 @@ for(i in 1:100){
   }
 }
 
+Studienfach <- as.factor(Studienfach)
+`Interesse an Mathematik` <- as.factor(`Interesse an Mathematik`)
+`Interesse an Programmieren` <- as.factor(`Interesse an Programmieren`)
+`Mathematik-LK(ja/nein)` <- as.factor(`Mathematik-LK(ja/nein)`)
+
 
 # Zusammenfassen der Spalten in einem Datensatz
 Datensatz <- data.frame(`ID`, `Alter`, `Studienfach`, `Interesse an Mathematik`,
