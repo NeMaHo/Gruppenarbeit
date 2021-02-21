@@ -18,35 +18,19 @@ source("Funktionen2.R")
 
 metric <- function(x) {
   
-  # Lagemasse
-  mittel <- mean(x)
-  med <- median(x)
-  modalwert <- which.max(table(x))
-  oberesQ <- unname(quantile(x, 0.75))
-  unteresQ <- unname(quantile(x, 0.25))
-  minimum <- min(x)
-  maximum <- max(x)
-  
-  # Streuungsmasse
-  spannweite <- maximum - minimum
-  varianz <- var(x)
-  stand <- sd(x)
-  quart <- oberesQ - unteresQ
-  
   return(list(
-    Lage = list(Mittelwert = mittel,
-                Modalwert = modalwert,
-                Minimum = minimum,
-                Unteres_Quartil = unteresQ,
-                Median = med,
-                Oberes_Quartil = oberesQ,
-                Maximum = maximum
-                ),
-    Streuung = list(Spannweite = spannweite,
-                    Varianz = varianz,
-                    Standardabweichung = stand,
-                    Quartilsdifferenz = quart
-    )
+    Lage = list(Mittelwert = mean(x),
+                Modalwert = which.max(table(x)),
+                Minimum = min(x),
+                Unteres_Quartil = unname(quantile(x, 0.25)),
+                Median = median(x),
+                Oberes_Quartil = unname(quantile(x, 0.75)),
+                Maximum = max(x)),
+    
+    Streuung = list(Spannweite = diff(range(x)),
+                    Varianz = var(x),
+                    Standardabweichung = sd(x),
+                    Quartilsdifferenz = IQR(x))
   ))
 }
 
@@ -54,52 +38,37 @@ metric <- function(x) {
 # b) deskriptive Statistiken - kategorisch
 
 # Funktion - categorical:
-# -> Analyse einer kategorischen Variable durch geeignete deskriptive Statistiken
+# -> Analyse einer kategorialen Variable durch geeignete deskriptive Statistiken
 
-# Input: kategroischer Vektor
+# Input: kategorialer Vektor
 
 # Output: benannte Liste aufgeteilt in Lage- und Streuungsmasse
 
 categorical <- function(x) {
   
-  # Lagemasse
-  med <- median(x)
-  modalwert <- which.max(table(x))
-  oberesQ <- unname(quantile(x, 0.75))
-  unteresQ <- unname(quantile(x, 0.25))
-  minimum <- min(x)
-  maximum <- max(x)
-  
-  # Streuungsmasse
-  spannweite <- maximum - minimum
-  varianz <- var(x)
-  stand <- sd(x)
-  quart <- oberesQ - unteresQ
-  
   return(list(
-    Lage = list(Modalwert = modalwert,
-                Minimum = minimum,
-                Unteres_Quartil = unteresQ,
-                Median = med,
-                Oberes_Quartil = oberesQ,
-                Maximum = maximum
-    ),
-    Streuung = list(Spannweite = spannweite,
-                    Quartilsdifferenz = quart
-    )
+    Lage = list(Modalwert = which.max(table(x)),
+                Minimum = min(x),
+                Unteres_Quartil = unname(quantile(x, 0.25)),
+                Median = median(x),
+                Oberes_Quartil = unname(quantile(x, 0.75)),
+                Maximum = max(x)),
+    
+    Streuung = list(Spannweite = diff(range(x)),
+                    Interquartilsabstand = IQR(x))
   ))
 }
 
 
 
-# c) deskriptive bivariate Zusammenhangs-Statistiken - kategorisch
+# c) deskriptive bivariate Zusammenhangs-Statistiken - kategorial
 
 # Funktion - categoricalRelation:
 # -> Berechnung des Rankkorrelationskoeffizientens nach Spearman und Kendall
 
 # Input: 
-# - x: kategorischer Vektor
-# - y: kategorischer Vektor
+# - x: kategorialer Vektor
+# - y: kategorialer Vektor
 
 # Output: benannte Liste mit zwei Rankkorrelationskoeffizienten von x und y
 
@@ -108,16 +77,13 @@ categoricalRelation <- function(x, y) {
   x_r <- rank(x)
   y_r <- rank(y)
   
-  kend <- Kendall(x_r, y_r)$tau[[1]]
-  spear <- cov(x_r, y_r) / (sd(x_r) * sd(y_r))
-  
-  return(list(Spearman = spear,
-              Kendall = kend))
+  return(list(Spearman = cov(x_r, y_r) / (sd(x_r) * sd(y_r)),
+              Kendall = Kendall(x_r, y_r)$tau[[1]]))
 }
 
 
 
-# d) deskriptive bivariate Zusammenhangs-Statistiken - kategorisch/metrisch
+# d) deskriptive bivariate Zusammenhangs-Statistiken - kategorial/metrisch
 
 # Funktion - metricCategoricalRelation:
 # -> Berechnung des Rankkorrelationskoeffizientens nach Spearman und Kendall,
@@ -125,7 +91,7 @@ categoricalRelation <- function(x, y) {
 
 # Input: 
 # - x: numerischer Vektor
-# - y: kategorischer Vektor
+# - y: kategorialer Vektor
 
 # Output: benannte Liste mit zwei Rankkorrelationskoeffizienten von x und y
 
@@ -134,11 +100,8 @@ metricCategoricalRelation <- function(x, y) {
   x_r <- rank(x)
   y_r <- rank(y)
   
-  kend <- Kendall(x_r, y_r)$tau[[1]]
-  spear <- cov(x_r, y_r) / (sd(x_r) * sd(y_r))
-  
-  return(list(Spearman = spear,
-              Kendall = kend))
+  return(list(Spearman = cov(x_r, y_r) / (sd(x_r) * sd(y_r)),
+              Kendall = Kendall(x_r, y_r)$tau[[1]]))
 }
 
 
@@ -150,7 +113,7 @@ metricCategoricalRelation <- function(x, y) {
 #    die Bereiche: "niedrig", "mittel", "hoch"
 
 # Input: 
-# - x: numerischer/kategorischer Vektor
+# - x: numerischer/kategorialer Vektor
 
 # Output: kategorisierter Vektor der Stufen: "niedrig", "mittel", "hoch" 
 
@@ -163,6 +126,22 @@ categorize <- function(x) {
   
   x_cat <- as.factor(x_cat)
   return(x_cat)
+}
+
+## Hier ein Alternativvorschlag. Waere effizienter, aber so benoetigten wir
+## die Funktion category nicht. Bin mir nicht sicher, ob das nicht eher schlecht
+## waere hinsichtlich des Erstellens eines zweiten Skripts :D
+categorize2 <- function(x)
+{
+  unten <- quantile(x, 1/3)
+  oben <- quantile(x, 2/3)
+  y <- x
+  
+  y[x <= unten] <- "niedrig"
+  y[(x > unten) & (x <= oben)] <- "mittel"
+  y[x > oben] <- "hoch"
+  
+  return(as.factor(y))
 }
 
 
@@ -180,6 +159,17 @@ categorize <- function(x) {
 plotCategorical <- function(...) {
   boxplot(...)
 }
+
+## Hier ein sehr kleiner Ansatz zu Funktion f.
+## Es werden mithilfe der Hilfsfunktion nominalH Tabellen mit absoluten Haeufigkeiten
+## fuer nominale Variablen eines eingegebenen Datensatzes x erstellt und in einer Liste
+## ausgegeben.
+plotCategorial2 <- function(x)
+{
+  liste <- lapply(x, nominalH)
+  liste[lengths(liste) != 0]
+}
+
 
 ## Testbereich
 x1 <- rnorm(100)
