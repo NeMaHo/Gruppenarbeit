@@ -17,7 +17,7 @@ source("Funktionen2.R")
 # Output: benannte Liste aufgeteilt in Lage- und Streuungsmasse
 
 metric <- function(x) {
-  
+  stopifnot(is.numeric(x))
   return(list(
     Lage = list(Mittelwert = mean(x),
                 Modalwert = which.max(table(x)),
@@ -96,7 +96,7 @@ categoricalRelation <- function(x, y) {
 # Output: benannte Liste mit zwei Rankkorrelationskoeffizienten von x und y
 
 metricCategoricalRelation <- function(x, y) {
-  
+  stopifnot(is.numeric(x))
   x_r <- rank(x)
   y_r <- rank(y)
   
@@ -133,6 +133,7 @@ categorize <- function(x) {
 ## waere hinsichtlich des Erstellens eines zweiten Skripts :D
 categorize2 <- function(x)
 {
+  stopifnot(is.numeric(x))
   unten <- quantile(x, 1/3)
   oben <- quantile(x, 2/3)
   y <- x
@@ -143,7 +144,6 @@ categorize2 <- function(x)
   
   return(as.factor(y))
 }
-
 
 
 # f) Visualisierung von kategorialen Variablen
