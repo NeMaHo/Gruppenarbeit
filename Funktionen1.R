@@ -35,7 +35,7 @@ metric <- function(x) {
 }
 
 
-# b) deskriptive Statistiken - kategorisch
+# b) deskriptive Statistiken - kategorial
 
 # Funktion - categorical:
 # -> Analyse einer kategorialen Variable durch geeignete deskriptive Statistiken
@@ -156,7 +156,7 @@ categorize2 <- function(x)
 
 # Output: Boxplot fuer ordinale Variablen, Barplot fuer nominale Variablen.
 
-plotCategorial = function(x)
+plotCategorical = function(x)
 {
   stopifnot(is.data.frame(x))
   par(mfrow = c(2, 2))
@@ -192,4 +192,5 @@ metricCategoricalRelation(x1, x2)
 categorize(x1)
 categorize(x2)
 
-plotCategorical(x1,x2)
+plotCategorical(as.data.frame(matrix(rep(x2,4),100)))
+
