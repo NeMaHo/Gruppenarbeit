@@ -149,25 +149,28 @@ categorize2 <- function(x)
 # f) Visualisierung von kategorialen Variablen
 
 # Funktion - plotCategorical:
-# -> Erstellen eines gemeinsamen Boxplots der Inputvektoren
+# -> Erstellen von drei oder vier Plots der Inputvariablen.
 
 # Input: 
-# - ...: Einzelne kategoriale Vektoren oder eine Matrix kategorialer Vektoren
+# - x: Ein Dataframe mit drei oder vier kategorialen Variablen.
 
-# Output: Boxplot der kategorialen Variablen
+# Output: Boxplot fuer ordinale Variablen, Barplot fuer nominale Variablen.
 
-plotCategorical <- function(...) {
-  boxplot(...)
-}
-
-## Hier ein sehr kleiner Ansatz zu Funktion f.
-## Es werden mithilfe der Hilfsfunktion nominalH Tabellen mit absoluten Haeufigkeiten
-## fuer nominale Variablen eines eingegebenen Datensatzes x erstellt und in einer Liste
-## ausgegeben.
-plotCategorial2 <- function(x)
+plotCategorial = function(x)
 {
-  liste <- lapply(x, nominalH)
-  liste[lengths(liste) != 0]
+  stopifnot(is.data.frame(x))
+  par(mfrow = c(2, 2))
+  for(i in 1:length(x))
+  {
+    if(is.numeric(x[,i]))
+    {
+      boxplot(x[,i])
+    }
+    else
+    {
+      barplot(nominalH(x[, i]))  
+    }
+  }  
 }
 
 
