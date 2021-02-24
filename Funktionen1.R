@@ -7,10 +7,11 @@ library(Kendall)
 # Working Directory muss korrekt gesetzt sein!
 source("Funktionen2.R")
 
+
 # a) deskriptive Statistiken - metrisch
 
 # Funktion - metric:
-# -> Analyse einer metrischen Variable durch geeignete deskriptive Statistiken
+# -> Analyse einer metrischen Variable durch geeignete Lage- und Streuungsmasse
 
 # Input: numerischer Vektor
 
@@ -38,7 +39,7 @@ metric <- function(x) {
 # b) deskriptive Statistiken - kategorial
 
 # Funktion - categorical:
-# -> Analyse einer kategorialen Variable durch geeignete deskriptive Statistiken
+# -> Analyse einer kategorialen Variable durch geeignete Lage- und Streuungsmasse
 
 # Input: kategorialer Vektor
 
@@ -60,7 +61,6 @@ categorical <- function(x) {
 }
 
 
-
 # c) deskriptive bivariate Zusammenhangs-Statistiken - kategorial
 
 # Funktion - categoricalRelation:
@@ -70,7 +70,8 @@ categorical <- function(x) {
 # - x: kategorialer Vektor
 # - y: kategorialer Vektor
 
-# Output: benannte Liste mit zwei Rankkorrelationskoeffizienten von x und y
+# Output: benannte Liste mit den Rankkorrelationskoeffizienten nach Spearman und
+#         Kendall von den Variablen x und y
 
 categoricalRelation <- function(x, y) {
   
@@ -80,7 +81,6 @@ categoricalRelation <- function(x, y) {
   return(list(Spearman = cov(x_r, y_r) / (sd(x_r) * sd(y_r)),
               Kendall = Kendall(x_r, y_r)$tau[[1]]))
 }
-
 
 
 # d) deskriptive bivariate Zusammenhangs-Statistiken - kategorial/metrisch
@@ -105,7 +105,6 @@ metricCategoricalRelation <- function(x, y) {
 }
 
 
-
 # e) Kategorisierung einer mindestens ordinalen Variable
 
 # Funktion - categorize:
@@ -119,20 +118,6 @@ metricCategoricalRelation <- function(x, y) {
 
 categorize <- function(x) {
   
-  x_cat <- vector("character", length(x))
-  for (i in seq_along(x)) {
-    x_cat[i] <- category(x, x[i]) 
-  }
-  
-  x_cat <- as.factor(x_cat)
-  return(x_cat)
-}
-
-## Hier ein Alternativvorschlag. Waere effizienter, aber so benoetigten wir
-## die Funktion category nicht. Bin mir nicht sicher, ob das nicht eher schlecht
-## waere hinsichtlich des Erstellens eines zweiten Skripts :D
-categorize2 <- function(x)
-{
   stopifnot(is.numeric(x))
   unten <- quantile(x, 1/3)
   oben <- quantile(x, 2/3)
@@ -164,7 +149,7 @@ plotCategorical = function(x, numBar = FALSE)
   stopifnot(is.data.frame(x))
   if(length(x) == 3)
   {
-    layout(matrix(c(1, 2, 3, 3), nr=2, byrow=T))
+    layout(matrix(c(1, 2, 3, 3), nr = 2, byrow = T))
   }
   else
   {
