@@ -153,13 +153,15 @@ categorize2 <- function(x)
 
 # Input: 
 # - x: Ein Dataframe mit drei oder vier kategorialen Variablen.
+# - numBar: numerischer Skalar oder Vektor, Zahlen zwischen 1 und 4
+#           Barplots anstelle von Boxplots für ordinalskalierte Variablen
+#           mit diesen Indizes, default FALSE
 
 # Output: Boxplot fuer ordinale Variablen, Barplot fuer nominale Variablen.
 
-plotCategorical = function(x)
+plotCategorical = function(x, numBar = FALSE)
 {
   stopifnot(is.data.frame(x))
-  #Aufteilung des Fenster abhaengig von Anzahl der Variablen
   if(length(x) == 3)
   {
     layout(matrix(c(1, 2, 3, 3), nr=2, byrow=T))
@@ -173,7 +175,14 @@ plotCategorical = function(x)
   {
     if(is.numeric(x[,i]))
     {
-      boxplot(x[,i])
+      if(any(numBar == i))
+      {
+        barplot(x[, i])
+      }
+      else
+      {
+        boxplot(x[, i])
+      }
     }
     else
     {
