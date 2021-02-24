@@ -159,7 +159,16 @@ categorize2 <- function(x)
 plotCategorical = function(x)
 {
   stopifnot(is.data.frame(x))
-  par(mfrow = c(2, 2))
+  #Aufteilung des Fenster abhaengig von Anzahl der Variablen
+  if(length(x) == 3)
+  {
+    layout(matrix(c(1, 2, 3, 3), nr=2, byrow=T))
+  }
+  else
+  {
+    par(mfrow = c(2, 2))
+  }
+  
   for(i in 1:length(x))
   {
     if(is.numeric(x[,i]))
