@@ -1,0 +1,103 @@
+# Datensatzanalyse
+
+#benoetigte Funktionen
+source("Funktionen1.R")
+source("Funktionen2.R")
+
+# Einlesen und Speichern des Datensatzes
+
+# download.file("raw-Link", "daten.csv")
+# daten <- read.csv2("daten.csv", sep = ",")[, -1]
+daten[, 2] <- as.numeric(daten[, 2])
+
+
+# Beschreibung des Datensatzes
+
+# Der Datensatz enthaelt 100 Beobachtungen fuer sechs Variablen.
+# Gemaess der Aufgabenstellung folgen die Bedeutungen und Skalenniveaus dieser:
+# 1 - ID: Beobachtungsnummer
+# 2 - Alter: metrische Skala (verhaeltnisskaliert)
+# 3 - Studienfach: kategoriale Skala (nominalskaliert) mit Merkmalsauspraegungen
+#                 "Statistik", "Mathematik", "Informatik", "Data Science"
+# 4 - Interesse an Mathematik: kategoriale Skala (ordinalskaliert) mit
+#                              Merkmalsauspraegungen 1 (niedrig) bis 7 (hoch)
+# 5 - Interesse an Programmieren: kategoriale Skala (ordinalskaliert) mit
+#                                 Merkmalsauspraegungen 1 (niedrig) bis 7 (hoch)
+# 6 - Mathematik LK: kategoriale Skala (ordinalskaliert, interpretativ nominal)
+#                    mit Merkmalsauspraegungen 1 (Ja) und 0 (Nein)
+
+
+# Analyse
+
+metric(as.numeric(daten[, 2]))
+
+
+categorical(daten[, 4])
+categorical(daten[, 5])
+
+
+# Interesse an Mathematik und Programmieren
+categoricalRelation(daten[, 4], daten[, 5])
+# Interesse an Mathematik und Mathe LK
+categoricalRelation(daten[, 4], daten[, 6])
+# Interesse an Programmieren und Mathe LK
+categoricalRelation(daten[, 5], daten[, 6])
+
+
+# Alter und Interesse an Mathematik
+metricCategoricalRelation(daten[, 2], daten[, 4])
+# Alter und Interesse an Programmieren
+metricCategoricalRelation(daten[, 2], daten[, 5])
+# Alter und Interesse an Mathe LK
+metricCategoricalRelation(daten[, 2], daten[, 6])
+
+# Alter
+alterCat <- categorize(daten[, 2])
+table(alterCat)
+# Das Alter der Befragten scheint gleichverteilt in den Kategorien.
+
+# Interesse an Mathematik
+matheCat <- categorize(daten[, 4])
+table(matheCat)
+# Das Interesse an Mathematik ist bei der beinahe der Haelfte niedrig und nur
+# bei fast einem Viertel hoch.
+
+# Interesse an Programmieren
+progCat <- categorize(daten[, 5])
+table(progCat)
+# Aehnlich zum Interesse an Mathematik ist auch das Interesse an Programmieren
+# bei vielen niedrig, jedoch bei fast gleicher Personenzahl hoch und mittel.
+
+
+table(alterCat, daten[, 3])
+# Informatikstudierende sind eher juenger.
+
+table(alterCat, matheCat)
+table(alterCat, progCat)
+# Das Interesse an Programmieren scheint im Vergleich zum Interesse an 
+# Mathematik beim hoeher kategorisiertem Alter etwas groesser zu sein.
+
+table(alterCat, daten[, 6])
+# Die Wahl des Mathe LKs scheint unabhaengig von der Zeit zu sein, in der 
+# die Probanden Abitur machten.
+
+
+table(daten[, 3], matheCat)
+# Das Interesse an Mathematik ist bei allen Mathestudierenden hoch, bei
+# Statistikern recht ausgeglichen auf die Kategorien, bei Data Scientisten
+# niedriger und bei Informatikern mehrheitlich niedrig.
+
+table(daten[, 3], progCat)
+# Das Interesse an Programmieren ist bei fast allen Informatikstudierenden
+# hoch und bei allen Mathematikern niedrig. Auch bei Statistik und Data Science
+# ist es eher niedrig.
+
+table(matheCat, daten[, 6])
+# Gleichverteilt scheint die Belegung des Mathe LKs vom Interesse an
+# Mathematik zu sein.
+table(progCat, daten[, 6])
+# Bei hoeherem Interesse an Programmieren wurde seltener der Mathe LK belegt.
+
+table(matheCat, progCat)
+
+plotCategorical(daten[, 2:5])
