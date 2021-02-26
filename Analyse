@@ -31,7 +31,7 @@ daten[, 2] <- as.numeric(daten[, 2])
 
 metric(as.numeric(daten[, 2]))
 # Das Durchschnittsalter der Befragten liegt zwischen 24 und 25 Jahren. 
-barplot(table(as.integer(daten[, 2])))
+barplot(table(round(daten[, 2])))
 # Alle Befragten sind zwischen 20 und 30, mit weniger Personen an den Raendern.
 
 
