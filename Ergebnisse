@@ -36,12 +36,11 @@
 # Bei den Mathematikern faellt auf, dass alle Mathe LK hatten. Bei den Statistikern
 # hatten ungefaehr 2/3 mathe LK, bei den Data Scientists 2/5 und bei den Informatikern
 # nur 1/3.
-# Auch steht das Interesse an Mathematik mit der Frage nach dem Mathe Lk in Relation.
-
-## Weitere Beobachtungen
-
 # Anhand des Spearmanschen Rangkorrelationskoeffizienten ist zu sehen, dass Personen mit
 # hoeherem Interesse an Mathematik auch den Mathe LK belegt haben. Es haben weniger Personen
 # mit hoeherem Interesse an Programmieren den Mathe LK gewählt.
 # Beides erscheint plausibel, da man beispielsweise meistens nur eine begrenzte Anzahl an
 # naturwissenschaftlichen Faechern im Abitur belegen kann.
+
+
+## Weitere Beobachtungen
