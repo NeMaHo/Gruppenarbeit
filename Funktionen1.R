@@ -162,7 +162,7 @@ plotCategorical = function(x, numBar = FALSE)
     {
       if(any(numBar == i))
       {
-        barplot(x[, i])
+        barplot(table(x[, i]))
       }
       else
       {
