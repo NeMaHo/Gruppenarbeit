@@ -92,6 +92,9 @@ table(alterCat, daten[, 6])
 # Die Wahl des Mathe LKs scheint unabhaengig von der Zeit zu sein, in der 
 # die Probanden Abitur machten.
 
+table(categorize(daten[, 4]), daten[, 6])
+# Personen, die ein hohes Interesse an Mathematik angegeben haben, tendieren
+# eher dazu, Mathe LK gehabt zu haben.
 
 table(daten[, 3], matheCat)
 # Das Interesse an Mathematik ist bei allen Mathestudierenden hoch, bei
