@@ -30,11 +30,15 @@ daten[, 2] <- as.numeric(daten[, 2])
 # Analyse
 
 metric(as.numeric(daten[, 2]))
+# Das Durchschnittsalter der Befragten liegt zwischen 24 und 25 Jahren. 
+plot(table(round(Datensatz[, 2])))
+# Alle Befragten sind zwischen 20 und 30, mit weniger Personen an den Raendern.
 
 
 categorical(daten[, 4])
 categorical(daten[, 5])
-
+Das Interesse fuer Mathematik ist niedriger verteilt als das fuer Programmierung.
+Gut erkennbar an den Quartilen, 2 und 5 bei Mathe und 5 un 7 bei Programmierung. 
 
 # Interesse an Mathematik und Programmieren
 categoricalRelation(daten[, 4], daten[, 5])
@@ -99,5 +103,8 @@ table(progCat, daten[, 6])
 # Bei hoeherem Interesse an Programmieren wurde seltener der Mathe LK belegt.
 
 table(matheCat, progCat)
+# Wenige Personen haben hohes Interesse, bei sowohl Mathe als auch Programmierung.
+# Relativ viele haben bei beidem niedriges Interesse. Die Meisten befragten haben mittleres
+# Interesse bei beidem oder bei einem hoch und dem anderen dann niedrig.
 
 plotCategorical(daten[, 2:5])
