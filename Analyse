@@ -108,6 +108,11 @@ table(matheCat, daten[, 6])
 table(progCat, daten[, 6])
 # Bei hoeherem Interesse an Programmieren wurde seltener der Mathe LK belegt.
 
+# Studienfach und Mathe LK
+table(daten[, 3], daten[, 6])
+# Der Mathe LK wurde haeufiger von Statistik- und Mathestudierenden belegt.
+
+
 table(matheCat, progCat)
 # Wenige Personen haben hohes Interesse, bei sowohl Mathe als auch Programmierung.
 # Relativ viele haben bei beidem niedriges Interesse. Die meisten Befragten haben mittleres
