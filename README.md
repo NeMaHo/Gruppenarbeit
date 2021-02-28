@@ -32,5 +32,5 @@ Aufgabe 3:
 - Funktionen2.R
 
 Aufgabe 4:
-- Analyse.R
+- Analyse
 - Ergebnisse
