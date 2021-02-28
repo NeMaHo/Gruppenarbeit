@@ -34,3 +34,6 @@ Aufgabe 3:
 Aufgabe 4:
 - Analyse
 - Ergebnisse
+
+Aufgabe 5:
+- Issue #7 Diskussion der Ergebnisse
