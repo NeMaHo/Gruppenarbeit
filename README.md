@@ -9,7 +9,7 @@ Folgende Personen haben an dieser Gruppenarbeit teilgenommen:
 - Stefan Maier (GitHub: smaier1509)
 
 
-Aufgabenteil 1 wurde bearbeitet von:
+Aufgabenteil 1/2 wurde bearbeitet von:
 - Stefan Maier
 - Tim Janis Schmale
 
@@ -19,3 +19,16 @@ Aufgabenteil 4 wurde bearbeitet von:
 - Nils Wesselbaum
 
 
+Die folgenden Dateien gehören zu den Aufgabenteilen:
+
+Aufgabe 1/2: 
+- W_Arbeiten_R_Skript.R
+- data-wissenschaftliches-Arbeiten.csv
+
+Aufgabe 3:
+- Funktionen1.R
+- Funktionen2.R
+
+Aufgabe 4:
+- Analyse.R
+- Ergebnisse
