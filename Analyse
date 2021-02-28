@@ -37,8 +37,8 @@ barplot(table(round(daten[, 2])))
 
 categorical(daten[, 4])
 categorical(daten[, 5])
-Das Interesse fuer Mathematik ist niedriger verteilt als das fuer Programmierung.
-Gut erkennbar an den Quartilen, 2 und 5 bei Mathe und 5 und 7 bei Programmierung. 
+# Das Interesse fuer Mathematik ist niedriger verteilt als das fuer Programmierung.
+# Gut erkennbar an den Quartilen, 2 und 5 bei Mathe und 5 und 7 bei Programmierung. 
 
 
 # Interesse an Mathematik und Programmieren
